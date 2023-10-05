@@ -1,0 +1,13 @@
+{
+	"name": "AzureDatabricks1",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-5396653445614974.14.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/904c4c48-1a7c-4f78-8213-bd057c21eecd/resourceGroups/caseStudyResource/providers/Microsoft.Databricks/workspaces/casestudypyfile1",
+			"existingClusterId": "1005-112211-qjgr4s7l"
+		}
+	}
+}
