@@ -1,13 +1,13 @@
 {
 	"name": "AzureDatabricks1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureDatabricks",
 		"typeProperties": {
 			"domain": "https://adb-5396653445614974.14.azuredatabricks.net",
-			"authentication": "MSI",
-			"workspaceResourceId": "/subscriptions/904c4c48-1a7c-4f78-8213-bd057c21eecd/resourceGroups/caseStudyResource/providers/Microsoft.Databricks/workspaces/casestudypyfile1",
-			"existingClusterId": "1005-112211-qjgr4s7l"
+			"existingClusterId": "1005-112211-qjgr4s7l",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDZDMjdFNEVBLTMzNDUtNDRFQy05NTY4LTk5N0IyNEZEMEY5RF83NzM1NzkzNi0wNDQxLTRlNTktOGFkMi00MWIwMmY4MzEwZDMiDQp9"
 		}
 	}
 }
