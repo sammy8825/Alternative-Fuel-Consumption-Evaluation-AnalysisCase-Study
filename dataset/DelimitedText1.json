@@ -1,0 +1,29 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "casestudyblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "alt_fuel_stations.txt",
+				"folderPath": "raw",
+				"container": "casestudygroup5"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Fuel Type Code\tStation Name\tStreet Address\tIntersection Directions\tCity\tState\tZIP\tPlus4\tStation Phone\tStatus Code\tExpected Date\tGroups With Access Code\tAccess Days Time\tCards Accepted\tBD Blends\tNG Fill Type Code\tNG PSI\tEV Level1 EVSE Num\tEV Level2 EVSE Num\tEV DC Fast Count\tEV Other Info\tEV Network\tEV Network Web\tGeocode Status\tLatitude\tLongitude\tDate Last Confirmed\tID\tUpdated At\tOwner Type Code\tFederal Agency ID\tFederal Agency Name\tOpen Date\tHydrogen Status Link\tNG Vehicle Class\tLPG Primary\tE85 Blender Pump\tEV Connector Types\tCountry\tIntersection Directions (French)\tAccess Days Time (French)\tBD Blends (French)\tGroups With Access Code (French)\tHydrogen Is Retail\tAccess Code\tAccess Detail Code\tFederal Agency Code\tFacility Type\tCNG Dispenser Num\tCNG On-Site Renewable Source\tCNG Total Compression Capacity\tCNG Storage Capacity\tLNG On-Site Renewable Source\tE85 Other Ethanol Blends\tEV Pricing\tEV Pricing (French)\tLPG Nozzle Types\tHydrogen Pressures\tHydrogen Standards\tCNG Fill Type Code\tCNG PSI\tCNG Vehicle Class\tLNG Vehicle Class\tEV On-Site Renewable Source\tRestricted Access\tRD Blends\tRD Blends (French)\tRD Blended with Biodiesel\tRD Maximum Biodiesel Level\tNPS Unit Name\tCNG Station Sells Renewable Natural Gas\tLNG Station Sells Renewable Natural Gas\tMaximum Vehicle Class\tEV Workplace Charging",
+				"type": "String"
+			}
+		]
+	}
+}
