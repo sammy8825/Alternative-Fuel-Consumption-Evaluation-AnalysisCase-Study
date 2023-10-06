@@ -1,7 +1,6 @@
 # Databricks notebook source
 dbutils.fs.mount(source="wasbs://casestudygroup5@casestudystorage.blob.core.windows.net/", mount_point="/mnt/bronze", extra_configs = {"fs.azure.account.key.casestudystorage.blob.core.windows.net": "MlAPBstJ5N6ky5Vwg7jjX2Tp4LsX37g84lpJzfYTmBnFqH722wQnGL/Zi/y3bGyQfyMh5iH+I4d1+AStzbmFNw=="})
 
-
 # COMMAND ----------
 
 # MAGIC %md
@@ -42,6 +41,10 @@ df = df.drop("Street Address","Intersection Directions", "Plus4", "Station Phone
 
 # COMMAND ----------
 
+df.write.format("csv").mode("overwrite").option("header",True).option("path","dbfs:/mnt/bronze/STG").saveAsTable("AlternateFuelStation_stg")
+
+# COMMAND ----------
+
 display(df.groupBy("Country").count())
 
 # COMMAND ----------
@@ -54,4 +57,8 @@ display(df.groupBy("Country").count())
 
 # COMMAND ----------
 
-df.write.format("csv").mode("overwrite").option("header",True).option("path","dbfs:/mnt/datasetscs1/STG").saveAsTable("AlternateFuelStation")
+df.write.format("csv").mode("overwrite").option("header",True).option("path","dbfs:/mnt/bronze/curated").saveAsTable("AlternateFuelStation_curated")
+
+# COMMAND ----------
+
+dbutils.fs.unmount("/mnt/bronze")
