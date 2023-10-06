@@ -1,0 +1,539 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "caseStudyDFGroup5"
+		},
+		"AzureDatabricks1_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+		},
+		"Light_Duty_Vehicles_Cleaning_Notebook_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Light_Duty_Vehicles_Cleaning_Notebook'"
+		},
+		"casestudyblobstorage_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'casestudyblobstorage'"
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1005-112211-qjgr4s7l"
+		},
+		"Light_Duty_Vehicles_Cleaning_Notebook_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1005-112211-qjgr4s7l"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Alternate_Fuel_Station_Cleaning_Pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Alternate_Fuel_Station",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Output",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Notebook1",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "Copy data1",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Repos/shellunext_1693422678955@npunext.onmicrosoft.com/Alternative-Fuel-Consumption-Evaluation-AnalysisCase-Study/Databricks Notebooks/Alternate_Fuel_Station_Cleaning_Notebook"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks1",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Alternate_Fuel_Station')]",
+				"[concat(variables('factoryId'), '/datasets/Output')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Light_Duty_Vehicles_Cleaning_Pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Light_Duty_Vehicles",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Output",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Notebook1",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "Copy data1",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Repos/shellunext_1693422678955@npunext.onmicrosoft.com/Alternative-Fuel-Consumption-Evaluation-AnalysisCase-Study/Databricks Notebooks/Light_Duty_Vehicles_Cleaning_Notebook"
+						},
+						"linkedServiceName": {
+							"referenceName": "Light_Duty_Vehicles_Cleaning_Notebook",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Light_Duty_Vehicles')]",
+				"[concat(variables('factoryId'), '/datasets/Output')]",
+				"[concat(variables('factoryId'), '/linkedServices/Light_Duty_Vehicles_Cleaning_Notebook')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Alternate_Fuel_Station')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "casestudyblobstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "alt_fuel_stations.txt",
+						"folderPath": "raw",
+						"container": "casestudygroup5"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Fuel Type Code\tStation Name\tStreet Address\tIntersection Directions\tCity\tState\tZIP\tPlus4\tStation Phone\tStatus Code\tExpected Date\tGroups With Access Code\tAccess Days Time\tCards Accepted\tBD Blends\tNG Fill Type Code\tNG PSI\tEV Level1 EVSE Num\tEV Level2 EVSE Num\tEV DC Fast Count\tEV Other Info\tEV Network\tEV Network Web\tGeocode Status\tLatitude\tLongitude\tDate Last Confirmed\tID\tUpdated At\tOwner Type Code\tFederal Agency ID\tFederal Agency Name\tOpen Date\tHydrogen Status Link\tNG Vehicle Class\tLPG Primary\tE85 Blender Pump\tEV Connector Types\tCountry\tIntersection Directions (French)\tAccess Days Time (French)\tBD Blends (French)\tGroups With Access Code (French)\tHydrogen Is Retail\tAccess Code\tAccess Detail Code\tFederal Agency Code\tFacility Type\tCNG Dispenser Num\tCNG On-Site Renewable Source\tCNG Total Compression Capacity\tCNG Storage Capacity\tLNG On-Site Renewable Source\tE85 Other Ethanol Blends\tEV Pricing\tEV Pricing (French)\tLPG Nozzle Types\tHydrogen Pressures\tHydrogen Standards\tCNG Fill Type Code\tCNG PSI\tCNG Vehicle Class\tLNG Vehicle Class\tEV On-Site Renewable Source\tRestricted Access\tRD Blends\tRD Blends (French)\tRD Blended with Biodiesel\tRD Maximum Biodiesel Level\tNPS Unit Name\tCNG Station Sells Renewable Natural Gas\tLNG Station Sells Renewable Natural Gas\tMaximum Vehicle Class\tEV Workplace Charging",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/casestudyblobstorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Light_Duty_Vehicles')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "casestudyblobstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "light-duty-vehicles-2023-08-07.csv",
+						"folderPath": "raw",
+						"container": "casestudygroup5"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Vehicle ID",
+						"type": "String"
+					},
+					{
+						"name": "Fuel ID",
+						"type": "String"
+					},
+					{
+						"name": "Fuel Configuration ID",
+						"type": "String"
+					},
+					{
+						"name": "Manufacturer ID",
+						"type": "String"
+					},
+					{
+						"name": "Category ID",
+						"type": "String"
+					},
+					{
+						"name": "Model",
+						"type": "String"
+					},
+					{
+						"name": "Model Year",
+						"type": "String"
+					},
+					{
+						"name": "Alternative Fuel Economy City",
+						"type": "String"
+					},
+					{
+						"name": "Alternative Fuel Economy Highway",
+						"type": "String"
+					},
+					{
+						"name": "Alternative Fuel Economy Combined",
+						"type": "String"
+					},
+					{
+						"name": "Conventional Fuel Economy City",
+						"type": "String"
+					},
+					{
+						"name": "Conventional Fuel Economy Highway",
+						"type": "String"
+					},
+					{
+						"name": "Conventional Fuel Economy Combined",
+						"type": "String"
+					},
+					{
+						"name": "Transmission Type",
+						"type": "String"
+					},
+					{
+						"name": "Engine Type",
+						"type": "String"
+					},
+					{
+						"name": "Engine Size",
+						"type": "String"
+					},
+					{
+						"name": "Engine Cylinder Count",
+						"type": "String"
+					},
+					{
+						"name": "Engine/Motor(s) Description",
+						"type": "String"
+					},
+					{
+						"name": "Manufacturer",
+						"type": "String"
+					},
+					{
+						"name": "Manufacturer URL",
+						"type": "String"
+					},
+					{
+						"name": "Category",
+						"type": "String"
+					},
+					{
+						"name": "Fuel Code",
+						"type": "String"
+					},
+					{
+						"name": "Fuel",
+						"type": "String"
+					},
+					{
+						"name": "Fuel Configuration Name",
+						"type": "String"
+					},
+					{
+						"name": "Electric-Only Range",
+						"type": "String"
+					},
+					{
+						"name": "PHEV Total Range",
+						"type": "String"
+					},
+					{
+						"name": "PHEV Type",
+						"type": "String"
+					},
+					{
+						"name": "Notes",
+						"type": "String"
+					},
+					{
+						"name": "Drivetrain",
+						"type": "String"
+					},
+					{
+						"name": "Charging Rate Level 2 (kW)",
+						"type": "String"
+					},
+					{
+						"name": "Charging Rate DC Fast (kW)",
+						"type": "String"
+					},
+					{
+						"name": "Charging Speed Level 1 (miles added per hour of charging)",
+						"type": "String"
+					},
+					{
+						"name": "Charging Speed Level 2 (miles added per hour of charging)",
+						"type": "String"
+					},
+					{
+						"name": "Charging Speed DC Fast (miles added per hour of charging)",
+						"type": "String"
+					},
+					{
+						"name": "Battery Voltage",
+						"type": "String"
+					},
+					{
+						"name": "Battery Capacity Amp Hours",
+						"type": "String"
+					},
+					{
+						"name": "Battery Capacity kWh",
+						"type": "String"
+					},
+					{
+						"name": "Seating Capacity",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/casestudyblobstorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Output')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "casestudyblobstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "output",
+						"container": "casestudygroup5"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/casestudyblobstorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricks1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-5396653445614974.14.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDatabricks1_accessToken')]"
+					},
+					"existingClusterId": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Light_Duty_Vehicles_Cleaning_Notebook')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-5396653445614974.14.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('Light_Duty_Vehicles_Cleaning_Notebook_accessToken')]"
+					},
+					"existingClusterId": "[parameters('Light_Duty_Vehicles_Cleaning_Notebook_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/casestudyblobstorage')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('casestudyblobstorage_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

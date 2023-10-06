@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "caseStudyDFGroup5"
+		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
+		"Light_Duty_Vehicles_Cleaning_Notebook_accessToken": {
+			"value": ""
+		},
+		"casestudyblobstorage_connectionString": {
+			"value": ""
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "1005-112211-qjgr4s7l"
+		},
+		"Light_Duty_Vehicles_Cleaning_Notebook_properties_typeProperties_existingClusterId": {
+			"value": "1005-112211-qjgr4s7l"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
