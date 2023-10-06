@@ -1,0 +1,177 @@
+{
+	"name": "Light_Duty_Vehicles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "casestudyblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "light-duty-vehicles-2023-08-07.csv",
+				"folderPath": "raw",
+				"container": "casestudygroup5"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Vehicle ID",
+				"type": "String"
+			},
+			{
+				"name": "Fuel ID",
+				"type": "String"
+			},
+			{
+				"name": "Fuel Configuration ID",
+				"type": "String"
+			},
+			{
+				"name": "Manufacturer ID",
+				"type": "String"
+			},
+			{
+				"name": "Category ID",
+				"type": "String"
+			},
+			{
+				"name": "Model",
+				"type": "String"
+			},
+			{
+				"name": "Model Year",
+				"type": "String"
+			},
+			{
+				"name": "Alternative Fuel Economy City",
+				"type": "String"
+			},
+			{
+				"name": "Alternative Fuel Economy Highway",
+				"type": "String"
+			},
+			{
+				"name": "Alternative Fuel Economy Combined",
+				"type": "String"
+			},
+			{
+				"name": "Conventional Fuel Economy City",
+				"type": "String"
+			},
+			{
+				"name": "Conventional Fuel Economy Highway",
+				"type": "String"
+			},
+			{
+				"name": "Conventional Fuel Economy Combined",
+				"type": "String"
+			},
+			{
+				"name": "Transmission Type",
+				"type": "String"
+			},
+			{
+				"name": "Engine Type",
+				"type": "String"
+			},
+			{
+				"name": "Engine Size",
+				"type": "String"
+			},
+			{
+				"name": "Engine Cylinder Count",
+				"type": "String"
+			},
+			{
+				"name": "Engine/Motor(s) Description",
+				"type": "String"
+			},
+			{
+				"name": "Manufacturer",
+				"type": "String"
+			},
+			{
+				"name": "Manufacturer URL",
+				"type": "String"
+			},
+			{
+				"name": "Category",
+				"type": "String"
+			},
+			{
+				"name": "Fuel Code",
+				"type": "String"
+			},
+			{
+				"name": "Fuel",
+				"type": "String"
+			},
+			{
+				"name": "Fuel Configuration Name",
+				"type": "String"
+			},
+			{
+				"name": "Electric-Only Range",
+				"type": "String"
+			},
+			{
+				"name": "PHEV Total Range",
+				"type": "String"
+			},
+			{
+				"name": "PHEV Type",
+				"type": "String"
+			},
+			{
+				"name": "Notes",
+				"type": "String"
+			},
+			{
+				"name": "Drivetrain",
+				"type": "String"
+			},
+			{
+				"name": "Charging Rate Level 2 (kW)",
+				"type": "String"
+			},
+			{
+				"name": "Charging Rate DC Fast (kW)",
+				"type": "String"
+			},
+			{
+				"name": "Charging Speed Level 1 (miles added per hour of charging)",
+				"type": "String"
+			},
+			{
+				"name": "Charging Speed Level 2 (miles added per hour of charging)",
+				"type": "String"
+			},
+			{
+				"name": "Charging Speed DC Fast (miles added per hour of charging)",
+				"type": "String"
+			},
+			{
+				"name": "Battery Voltage",
+				"type": "String"
+			},
+			{
+				"name": "Battery Capacity Amp Hours",
+				"type": "String"
+			},
+			{
+				"name": "Battery Capacity kWh",
+				"type": "String"
+			},
+			{
+				"name": "Seating Capacity",
+				"type": "String"
+			}
+		]
+	}
+}

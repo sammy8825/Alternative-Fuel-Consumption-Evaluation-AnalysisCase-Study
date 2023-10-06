@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText2",
+	"name": "Output",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "casestudyblobstorage",

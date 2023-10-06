@@ -1,5 +1,5 @@
 {
-	"name": "Alternate_Fuel_Station_Cleaning_Pipeline",
+	"name": "Light_Duty_Vehicles_Cleaning_Pipeline",
 	"properties": {
 		"activities": [
 			{
@@ -49,7 +49,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Alternate_Fuel_Station",
+						"referenceName": "Light_Duty_Vehicles",
 						"type": "DatasetReference"
 					}
 				],
@@ -80,10 +80,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Repos/shellunext_1693422678955@npunext.onmicrosoft.com/Alternative-Fuel-Consumption-Evaluation-AnalysisCase-Study/Databricks Notebooks/Alternate_Fuel_Station_Cleaning_Notebook"
+					"notebookPath": "/Repos/shellunext_1693422678955@npunext.onmicrosoft.com/Alternative-Fuel-Consumption-Evaluation-AnalysisCase-Study/Databricks Notebooks/Light_Duty_Vehicles_Cleaning_Notebook"
 				},
 				"linkedServiceName": {
-					"referenceName": "AzureDatabricks1",
+					"referenceName": "Light_Duty_Vehicles_Cleaning_Notebook",
 					"type": "LinkedServiceReference"
 				}
 			}

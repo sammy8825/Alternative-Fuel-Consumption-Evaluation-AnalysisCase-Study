@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText1",
+	"name": "Alternate_Fuel_Station",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "casestudyblobstorage",
